@@ -37,8 +37,7 @@
                     <a href="{{Route('users.edit',$user->id)}}" class="btn-group">
                         <span class="btn btn-primary">Editar</span>
                     </a>
-                    <a href="" class="btn-group">
-                        <span class="btn btn-danger">Deletar</span>
+                    <a href="{!! url('users/destroy/'.$user->id) !!}" class="btn btn-danger">Deletar
                     </a>
                 </td>
             </tr>

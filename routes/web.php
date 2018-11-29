@@ -16,6 +16,7 @@ Route::get('/', function () {
 });
 
 Route::resource('/users', 'UserController');
+Route::get('/users/destroy/{id}', 'UserController@destroy');
 
 Auth::routes();
 
