@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'cpf', 'telefone', 'name', 'password', 'email', 'tipo', 'punicao',
+        'cpf', 'telefone', 'name', 'password', 'email', 'tipo', 'punicao','dataPunicao',
     ];
 
     /**
@@ -26,5 +26,14 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'password', 'remember_token',
+    ];
+
+    public $rules = [
+        'name' => 'required|min:3',
+        'cpf' => 'required|min:11|max:11',
+        'telefone' => 'required|min:8|max:13',
+        'password' => 'required|min:6',
+        'password' => 'required|min:6',
+        'tipo' => 'required',
     ];
 }

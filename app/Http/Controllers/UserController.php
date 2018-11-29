@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
 
 class UserController extends Controller
 {
@@ -11,9 +12,24 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    private $user;
+
+    /**
+     * UserController constructor.
+     * @param $user
+     */
+    public function __construct(User $user)
+    {
+        $this->user = $user;
+    }
+
+
     public function index()
     {
-        //
+        $users = $this->user->all();
+
+        return view('users.index',compact('users'));
     }
 
     /**
@@ -23,7 +39,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('users.cad');
     }
 
     /**
@@ -34,7 +50,19 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $dados = $request->only(['name', 'password' , 'email', 'tipo', 'cpf', 'telefone', 'punicao']);
+
+        $dados['password'] = bcrypt($dados['password']);
+
+        $this->validate($request, $this->user->rules);
+
+        $insert = $this->user->create($dados);
+        
+        if($insert)
+            return redirect()->route('users.index');
+        else
+            return redirect()->route('users.create');
     }
 
     /**
@@ -56,7 +84,11 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = $this->user->find($id);
+
+
+        return view('users.cad',compact('user'));
+
     }
 
     /**
@@ -68,7 +100,21 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $dados = $request->all();
+
+        $dados['password'] = bcrypt($dados['password']);
+
+
+        $this->validate($request, $this->user->rules);
+
+        $user = $this->user->find($id);
+
+        $update = $user->update($dados);
+
+        if($update)
+            return redirect()->route('users.index');
+        else
+            return redirect()->route('users.edit', $id);
     }
 
     /**
