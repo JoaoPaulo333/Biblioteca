@@ -18,6 +18,10 @@ Route::get('/', function () {
 Route::resource('/users', 'UserController');
 Route::get('/users/destroy/{id}', 'UserController@destroy');
 
+
+Route::resource('/livros', 'LivroController');
+Route::get('/livros/destroy/{id}', 'LivroController@destroy');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

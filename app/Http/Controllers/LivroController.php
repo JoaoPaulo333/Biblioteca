@@ -2,10 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use App\Livro;
 
 class LivroController extends Controller
 {
+    private $livro;
+
+    /**
+     * LivroController constructor.
+     * @param $livro
+     */
+    public function __construct(Livro $livro)
+    {
+        $this->livro = $livro;
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +27,9 @@ class LivroController extends Controller
      */
     public function index()
     {
-        //
+        $livros = DB::select('SELECT l.id,l.titulo,l.isbn,l.edicao,l.editora,l.ano,a.nome as autor,c.nome as categoria from livro l inner join autor a on l.Autor_id = a.id inner join categoria c on l.Categoria_id = c.id');
+
+        return view('livros.index',compact('livros'));
     }
 
     /**
@@ -23,7 +39,11 @@ class LivroController extends Controller
      */
     public function create()
     {
-        //
+        $autores = DB::select('select * from autor');
+
+        $categorias = DB::select('select * from categoria');
+
+        return view('livros.cad',compact('autores','categorias'));
     }
 
     /**
@@ -34,7 +54,16 @@ class LivroController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $dados = $request->all();
+
+        $this->validate($request, $this->livro->rules);
+
+        $insert = $this->livro->create($dados);
+
+        if($insert)
+            return redirect()->route('livros.index');
+        else
+            return redirect()->route('livros.create');
     }
 
     /**
