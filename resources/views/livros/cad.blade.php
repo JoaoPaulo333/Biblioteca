@@ -27,17 +27,14 @@
             <input class="form-control" type="text" name="edicao" placeholder="Edicao:" value="{{$livro->edicao }}">
             <input class="form-control" type="text" name="editora" placeholder="Editora:" value="{{$livro->editora }}">
             <input class="form-control" type="number" name="ano" placeholder="Ano:" value="{{$livro->ano }}">
-            <select class="form-control" name="autor">
+            <select class="form-control" name="Autor_id">
                 @foreach($autores as $autor)
-                    <option value="{{$autor->id}}"
-                            @if(isset($livro) && $livro->autor == $autor->id ) selected @endif>{{$autor->nome}}</option>
-
+                    <option value="{{$autor->id}}" @if(isset($livro) && $livro->Autor_id == $autor->id ) selected @endif>{{$autor->nome}}</option>
                 @endforeach
             </select>
-            <select class="form-control" name="categoria">
+            <select class="form-control" name="Categoria_id">
                 @foreach($categorias as $categoria)
-                    <option value="{{$categoria->id}}"
-                            @if(isset($livro) && $livro->categoria == $categoria->id ) selected @endif>{{$categoria->nome}}</option>
+                    <option value="{{$categoria->id}}" @if(isset($livro) && $livro->Categoria_id == $categoria->id ) selected @endif>{{$categoria->nome}}</option>
                 @endforeach
             </select>
 

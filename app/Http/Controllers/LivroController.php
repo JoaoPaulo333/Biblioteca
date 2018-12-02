@@ -85,7 +85,16 @@ class LivroController extends Controller
      */
     public function edit($id)
     {
-        //
+
+        $livro = $this->livro->find($id);
+
+
+        $autores = DB::select('select * from autor');
+
+        $categorias = DB::select('select * from categoria');
+
+
+        return view('livros.cad',compact('livro','autores','categorias'));
     }
 
     /**
@@ -97,7 +106,18 @@ class LivroController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $dados = $request->all();
+
+//        $this->validate($request, $this->livro->rules);
+
+        $livro = $this->livro->find($id);
+
+        $update = $livro->update($dados);
+
+        if($update)
+            return redirect()->route('livros.index');
+        else
+            return redirect()->route('livros.edit', $id);
     }
 
     /**
@@ -108,6 +128,12 @@ class LivroController extends Controller
      */
     public function destroy($id)
     {
-        //
+
+        $livro = $this->livro->find($id);
+
+        $delete = $livro->delete();
+
+        if($delete)
+            return redirect()->route('livros.index');
     }
 }

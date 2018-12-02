@@ -23,6 +23,8 @@ class HomeController extends Controller
      */
     public function index()
     {
+        //pega o tipo do usuario e manda para a pagina com compact
+//        dd($user = auth()->user()->tipo);
         return view('home');
     }
 }

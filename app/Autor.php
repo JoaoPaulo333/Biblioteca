@@ -11,4 +11,8 @@ class Autor extends Model
     protected $fillable = [
         'nome',
     ];
+
+    public $rules = [
+        'nome' => 'required|min:3',
+    ];
 }

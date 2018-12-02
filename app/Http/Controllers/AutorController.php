@@ -3,9 +3,23 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Autor;
 
 class AutorController extends Controller
 {
+
+    private $autor;
+
+    /**
+     * AutorController constructor.
+     * @param $autor
+     */
+    public function __construct(Autor $autor)
+    {
+        $this->autor = $autor;
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +27,9 @@ class AutorController extends Controller
      */
     public function index()
     {
-        //
+        $autors = $this->autor->all();
+
+        return view('autors.index',compact('autors'));
     }
 
     /**
@@ -23,7 +39,7 @@ class AutorController extends Controller
      */
     public function create()
     {
-        //
+        return view('autors.cad');
     }
 
     /**
@@ -34,7 +50,16 @@ class AutorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $dados = $request->all();
+
+        $this->validate($request, $this->autor->rules);
+
+        $insert = $this->autor->create($dados);
+
+        if($insert)
+            return redirect()->route('autors.index');
+        else
+            return redirect()->route('autors.create');
     }
 
     /**
@@ -56,7 +81,11 @@ class AutorController extends Controller
      */
     public function edit($id)
     {
-        //
+
+        $autor = $this->autor->find($id);
+
+
+        return view('autors.cad',compact('autor'));
     }
 
     /**
@@ -68,7 +97,18 @@ class AutorController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $dados = $request->all();
+
+        $this->validate($request, $this->autor->rules);
+
+        $autor = $this->autor->find($id);
+
+        $update = $autor->update($dados);
+
+        if($update)
+            return redirect()->route('autors.index');
+        else
+            return redirect()->route('autors.edit', $id);
     }
 
     /**
@@ -79,6 +119,11 @@ class AutorController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $autor = $this->autor->find($id);
+
+        $delete = $autor->delete();
+
+        if($delete)
+            return redirect()->route('autors.index');
     }
 }
