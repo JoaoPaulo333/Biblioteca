@@ -3,9 +3,22 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Categoria;
 
 class CategoriaController extends Controller
 {
+    private $categoria;
+
+    /**
+     * CategoriaController constructor.
+     * @param $categoria
+     */
+    public function __construct(Categoria $categoria)
+    {
+        $this->categoria = $categoria;
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +26,9 @@ class CategoriaController extends Controller
      */
     public function index()
     {
-        //
+        $categorias = $this->categoria->all();
+
+        return view('categorias.index',compact('categorias'));
     }
 
     /**
@@ -23,7 +38,7 @@ class CategoriaController extends Controller
      */
     public function create()
     {
-        //
+        return view('categorias.cad');
     }
 
     /**
@@ -34,7 +49,16 @@ class CategoriaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $dados = $request->all();
+
+        $this->validate($request, $this->categoria->rules);
+
+        $insert = $this->categoria->create($dados);
+
+        if($insert)
+            return redirect()->route('categorias.index');
+        else
+            return redirect()->route('categorias.create');
     }
 
     /**
@@ -56,7 +80,9 @@ class CategoriaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $categoria = $this->categoria->find($id);
+
+        return view('categorias.cad',compact('categoria'));
     }
 
     /**
@@ -68,7 +94,19 @@ class CategoriaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $dados = $request->all();
+
+        $this->validate($request, $this->categoria->rules);
+
+        $categoria = $this->categoria->find($id);
+
+        $update = $categoria->update($dados);
+
+        if($update)
+            return redirect()->route('categorias.index');
+        else
+            return redirect()->route('categorias.edit', $id);
     }
 
     /**
@@ -79,6 +117,11 @@ class CategoriaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $categoria = $this->categoria->find($id);
+
+        $delete = $categoria->delete();
+
+        if($delete)
+            return redirect()->route('categorias.index');
     }
 }

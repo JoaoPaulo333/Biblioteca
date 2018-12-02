@@ -11,4 +11,10 @@ class Categoria extends Model
     protected $fillable = [
         'nome', 'assunto', 'descricao',
     ];
+
+    public $rules = [
+        'nome' => 'required|min:3',
+        'assunto' => 'required',
+        'descricao' => 'required',
+    ];
 }

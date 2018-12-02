@@ -26,6 +26,9 @@ Route::get('/livros/destroy/{id}', 'LivroController@destroy');
 Route::resource('/autors', 'AutorController');
 Route::get('/autors/destroy/{id}', 'AutorController@destroy');
 
+Route::resource('/categorias', 'CategoriaController');
+Route::get('/categorias/destroy/{id}', 'CategoriaController@destroy');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

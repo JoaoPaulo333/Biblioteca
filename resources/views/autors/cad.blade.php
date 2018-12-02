@@ -4,7 +4,7 @@
 @stop
 
 @section('content')
-    @if(isset($livro))
+    @if(isset($autor))
         <h1>Edita de Autores</h1>
     @else
         <h1>Cadastra de Autores</h1>

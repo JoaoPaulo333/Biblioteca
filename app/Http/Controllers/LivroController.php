@@ -108,7 +108,7 @@ class LivroController extends Controller
     {
         $dados = $request->all();
 
-//        $this->validate($request, $this->livro->rules);
+        $this->validate($request, $this->livro->rules);
 
         $livro = $this->livro->find($id);
 
