@@ -35,6 +35,9 @@ Route::get('/categorias/destroy/{id}', 'CategoriaController@destroy');
 Route::resource('/exemplars', 'ExemplarController');
 Route::get('/exemplars/destroy/{id}', 'ExemplarController@destroy');
 
+Route::resource('/emprestimos', 'EmprestimoController');
+Route::get('/emprestimos/destroy/{id}', 'EmprestimoController@destroy');
+
 
 Auth::routes();
 
