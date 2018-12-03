@@ -3,9 +3,24 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Exemplar;
+
+use Illuminate\Support\Facades\DB;
 
 class ExemplarController extends Controller
 {
+    private $exemplar;
+
+    /**
+     * ExemplarController constructor.
+     * @param $exemplar
+     */
+    public function __construct(Exemplar $exemplar)
+    {
+        $this->exemplar = $exemplar;
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +28,10 @@ class ExemplarController extends Controller
      */
     public function index()
     {
-        //
+
+        $exemplares = DB::select('select e.id ,e.arquivo,e.disponivel,l.titulo from exemplar e inner join livro l on e.Livro_id = l.id');
+
+        return view('exemplars.index',compact('exemplares'));
     }
 
     /**
@@ -23,7 +41,9 @@ class ExemplarController extends Controller
      */
     public function create()
     {
-        //
+        $livros = DB::select('select * from livro');
+
+        return view('exemplars.cad',compact('livros'));
     }
 
     /**
@@ -34,7 +54,29 @@ class ExemplarController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $dados = $request->all();
+
+        $this->validate($request, $this->exemplar->rules);
+
+        if ($request->hasFile('arquivo') && $request->file('arquivo')->isValid()){
+
+            $name = $dados['Livro_id'];
+
+            $estencao = $request->arquivo->extension();
+
+            $nomeArq = "{$name}.{$estencao}";
+
+            $dados['arquivo'] = $nomeArq;
+
+            $request->arquivo->storeAs('arquivos',$nomeArq);
+        }
+
+        $insert = $this->exemplar->create($dados);
+
+        if($insert)
+            return redirect()->route('exemplars.index');
+        else
+            return redirect()->route('exemplars.create');
     }
 
     /**
@@ -56,7 +98,10 @@ class ExemplarController extends Controller
      */
     public function edit($id)
     {
-        //
+
+        $exemplar= $this->exemplar->find($id);
+
+        return view('exemplars.exibir',compact('exemplar'));
     }
 
     /**
@@ -68,7 +113,19 @@ class ExemplarController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $dados = $request->all();
+
+        $this->validate($request, $this->exemplar->rules);
+
+        $exemplar = $this->exemplar->find($id);
+
+        $update = $exemplar->update($dados);
+
+        if($update)
+            return redirect()->route('exemplars.index');
+        else
+            return redirect()->route('exemplars.edit', $id);
     }
 
     /**
@@ -79,6 +136,12 @@ class ExemplarController extends Controller
      */
     public function destroy($id)
     {
-        //
+
+        $exemplar = $this->exemplar->find($id);
+
+        $delete = $exemplar->delete();
+
+        if($delete)
+            return redirect()->route('exemplars.index');
     }
 }
