@@ -29,6 +29,9 @@ Route::get('/autors/destroy/{id}', 'AutorController@destroy');
 Route::resource('/categorias', 'CategoriaController');
 Route::get('/categorias/destroy/{id}', 'CategoriaController@destroy');
 
+Route::resource('/emprestimos', 'EmprestimoController');
+Route::get('/emprestimos/destroy/{id}', 'EmprestimoController@destroy');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
