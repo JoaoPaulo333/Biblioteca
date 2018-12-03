@@ -56,16 +56,16 @@ class EmprestimoController extends Controller
      */
     public function store(Request $request)
     {
-        $dados = $request->all();
-//tem que validar casos aqui e no edit e excluir e em ambos validar o usuario
-//        $this->validate($request, $this->emprestimo->rules);
-
-        $insert = $this->emprestimo->create($dados);
-
-        if($insert)
-            return redirect()->route('emprestimos.index');
-        else
-            return redirect()->route('emprestimos.create');
+//        $dados = $request->all();
+////tem que validar casos aqui e no edit e excluir e em ambos validar o usuario
+////        $this->validate($request, $this->emprestimo->rules);
+////
+//        $insert = $this->emprestimo->create($dados);
+//
+//        if($insert)
+//            return redirect()->route('emprestimos.index');
+//        else
+//            return redirect()->route('emprestimos.create');
     }
 
     /**

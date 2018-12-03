@@ -19,6 +19,9 @@ Route::resource('/users', 'UserController');
 Route::get('/users/destroy/{id}', 'UserController@destroy');
 
 
+Route::resource('/reservas', 'ReservaController');
+Route::get('/reservas/destroy/{id}', 'ReservaController@destroy');
+
 Route::resource('/livros', 'LivroController');
 Route::get('/livros/destroy/{id}', 'LivroController@destroy');
 
@@ -31,6 +34,7 @@ Route::get('/categorias/destroy/{id}', 'CategoriaController@destroy');
 
 Route::resource('/emprestimos', 'EmprestimoController');
 Route::get('/emprestimos/destroy/{id}', 'EmprestimoController@destroy');
+
 
 Auth::routes();
 

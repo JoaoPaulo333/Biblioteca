@@ -11,4 +11,11 @@ class Reserva extends Model
     protected $fillable = [
         'data', 'Livro_id', 'Usuario_id',
     ];
+
+
+    public $rules = [
+        'data' => 'required',
+        'Livro_id' => 'required',
+        'Usuario_id' => 'required',
+    ];
 }

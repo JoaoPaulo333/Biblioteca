@@ -13,7 +13,7 @@ class CreateReservasTable extends Migration
      */
     public function up()
     {
-        Schema::create('reserva', function (Blueprint $table) {
+        Schema::create('reservas', function (Blueprint $table) {
             $table->increments('id');
             $table->string('data');
             $table->integer('Livro_id')->unsigned();
@@ -32,6 +32,6 @@ class CreateReservasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('reserva');
+        Schema::dropIfExists('reservas');
     }
 }
