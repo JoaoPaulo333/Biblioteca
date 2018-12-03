@@ -27,7 +27,7 @@ class EmprestimoController extends Controller
      */
     public function index()
     {
-        $emprestimos = DB::select('select e.id, e.dataIda,e.dataVolta,u.name,l.titulo from emprestimo e inner join users u on e.Usuario_id = u.id inner join exemplar ex on e.Exemplar_id = ex.id inner join livro l on ex.Livro_id = l.id;');
+        $emprestimos = DB::select('select e.id, e.dataIda, e.devolvido,e.dataVolta,u.name,l.titulo from emprestimo e inner join users u on e.Usuario_id = u.id inner join exemplar ex on e.Exemplar_id = ex.id inner join livro l on ex.Livro_id = l.id where e.devolvido = 0;');
 
 
         return view('emprestimos.index',compact('emprestimos'));
@@ -59,13 +59,33 @@ class EmprestimoController extends Controller
         $dados = $request->all();
 //tem que validar casos aqui e no edit e excluir e em ambos validar o usuario
 //        $this->validate($request, $this->emprestimo->rules);
-//
-        $insert = $this->emprestimo->create($dados);
+        $tipo = DB::select('select * from users where id ='.$dados['Usuario_id']);
 
-        if($insert)
-            return redirect()->route('emprestimos.index');
-        else
-            return redirect()->route('emprestimos.create');
+        $tipo = $tipo[0];
+        if($tipo) {
+            $punido = DB::select('select punicao from users where id =' . $tipo->id);
+            if ($punido[0]->punicao == 1)
+                return 'Este usuario esta Punido e nao pode pegar livros';
+            else
+                if ($tipo->tipo == 'Aluno' || $tipo->tipo == 'Funcionario') {
+                    $quantidade = DB::select('SELECT count(Usuario_id) as cont from emprestimo where Usuario_id ='.$tipo->id);
+                    if($quantidade[0]->cont >=3)
+                        return 'O Este usuario ja esta de posse de seu limite de emprestimos';
+//                    else
+
+
+
+                }
+
+//
+//        $insert = $this->emprestimo->create($dados);
+//
+//        if($insert)
+//            return redirect()->route('emprestimos.index');
+//        else
+//            return redirect()->route('emprestimos.create');
+        }else
+            return redirect()->route('emprestimos.index',imap_alerts('Erro'));
     }
 
     /**

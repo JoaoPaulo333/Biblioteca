@@ -9,7 +9,7 @@ class Emprestimo extends Model
     protected $table = "Emprestimo";
 
     protected $fillable = [
-        'dataIda', 'dataVolta', 'Usuario_id', 'Exemplar_id',
+        'dataIda', 'dataVolta','devolvido', 'Usuario_id', 'Exemplar_id',
     ];
     public $rules = [
         'Usuario_id' => 'required',

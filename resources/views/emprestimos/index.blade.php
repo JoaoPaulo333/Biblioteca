@@ -34,5 +34,6 @@
                 </td>
             </tr>
         @endforeach
+
     </table>
 @stop

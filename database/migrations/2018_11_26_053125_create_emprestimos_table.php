@@ -17,6 +17,7 @@ class CreateEmprestimosTable extends Migration
             $table->increments('id');
             $table->string('dataIda');
             $table->string('dataVolta');
+            $table->integer('devolvido')->default(0);
             $table->integer('Usuario_id')->unsigned();
             $table->integer('Exemplar_id')->unsigned();
             $table->timestamps();

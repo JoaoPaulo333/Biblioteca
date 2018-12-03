@@ -24,14 +24,15 @@
             {!! csrf_field() !!}
             <input type="hidden" name="dataIda" value="{{date('d/m/y')}}">//essescampos serao mudados
             <input type="hidden" name="dataVolta" value="{{date('d/m/y')}}">//
+            <input type="hidden" name="devolvido" value="{{$emprestimo->devolvido}}">
             <select class="form-control" name="Usuario_id">
                 @foreach($usuarios as $usuario)
-                    <option value="{{$usuario->id}}" @if(isset($livro) && $emprestimo->Usuario_id == $usuario->id ) selected @endif>{{$usuario->name}}</option>
+                    <option value="{{$usuario->id}}" @if(isset($emprestimo) && $emprestimo->Usuario_id == $usuario->id ) selected @endif>{{$usuario->name}}</option>
                 @endforeach
             </select>
             <select class="form-control" name="Exemplar_id">
                 @foreach($exemplars as $exemplar)
-                    <option value="{{$exemplar->id}}" @if(isset($livro) && $emprestimo->Exemplar_id == $exemplar->id ) selected @endif>{{$exemplar->titulo}}</option>
+                    <option value="{{$exemplar->id}}" @if(isset($emprestimo) && $emprestimo->Exemplar_id == $exemplar->id ) selected @endif>{{$exemplar->titulo}}</option>
                 @endforeach
             </select>
 
@@ -41,6 +42,7 @@
 
                     <input type="hidden" name="dataIda" value="{{date('d/m/y')}}">//essescampos serao mudados
                     <input type="hidden" name="dataVolta" value="{{date('d/m/y')}}">//
+                    <input type="hidden" name="devolvido" value="0">
                     <select class="form-control" name="Usuario_id">
                         @foreach($usuarios as $usuario)
                             <option value="{{$usuario->id}}" >{{$usuario->name}}</option>
