@@ -27,10 +27,13 @@ class EmprestimoController extends Controller
      */
     public function index()
     {
-        $emprestimos = DB::select('select e.id, e.dataIda, e.devolvido,e.dataVolta,u.name,l.titulo from emprestimo e inner join users u on e.Usuario_id = u.id inner join exemplar ex on e.Exemplar_id = ex.id inner join livro l on ex.Livro_id = l.id where e.devolvido = 0;');
+        $user = auth()->user()->tipo;
+
+            $emprestimos = DB::select('select e.id, e.dataIda, e.devolvido,e.dataVolta,u.name,l.titulo from emprestimo e inner join users u on e.Usuario_id = u.id inner join exemplar ex on e.Exemplar_id = ex.id inner join livro l on ex.Livro_id = l.id where e.devolvido = 0;');
 
 
-        return view('emprestimos.index', compact('emprestimos'));
+            return view('emprestimos.index', compact('emprestimos','user'));
+
 
     }
 
@@ -41,11 +44,14 @@ class EmprestimoController extends Controller
      */
     public function create()
     {
+        if($user = 'Funcionario') {
         $usuarios = DB::select('select * from users');
 
         $exemplars = DB::select('SELECT * FROM exemplar e inner join livro l on e.Livro_id = l.id where e.disponivel = 1;');
 
         return view('emprestimos.cad', compact('usuarios', 'exemplars'));
+        }else
+            return "seu usuario nao tem esta permicao";
     }
 
     /**
@@ -72,17 +78,29 @@ class EmprestimoController extends Controller
                     if ($quantidade[0]->cont >= 3)
                         return 'O Este usuario ja esta de posse de seu limite de emprestimos';
                     else
-                        $reservado = DB::select('SELECT r.id from  reserva r inner join livro l on r.Livro_id =l.id inner join exemplar e on e.Livro_id = l.id where r.Usuario_id = ' . $tipo->id . ' and e.id =' . $dados['Exemplar_id']);
-                    if ($reservado)
-                        DB::update('update reserva set correspondido = 1 where id =' . $reservado[0]->id);
+
 
 
                     $data = date('Y-m-d', strtotime('+10 days'));
                     $dados['dataVolta'] = $data;
+                    DB::update('update exemplar set disponivel = 0 where id = ' . $dados['Exemplar_id']);
                 }
+            if ($tipo->tipo == 'Professor' ) {
+                $quantidade = DB::select('SELECT count(Usuario_id) as cont from emprestimo where Usuario_id =' . $tipo->id);
+                if ($quantidade[0]->cont >= 5)
+                    return 'O Este usuario ja esta de posse de seu limite de emprestimos';
+                else
+
+
+
+                    $data = date('Y-m-d', strtotime('+15 days'));
+                $dados['dataVolta'] = $data;
+                DB::update('update exemplar set disponivel = 0 where id = ' . $dados['Exemplar_id']);
+            }
             $dataHj = date('Y-m-d');
             $dados['dataIda'] = $dataHj;
-            DB::update('update exemplar set disponivel = 0 where id = ' . $dados['Exemplar_id'] ." and arquivo = null");
+            $reservado = DB::select('SELECT r.id from  reserva r inner join livro l on r.Livro_id =l.id inner join exemplar e on e.Livro_id = l.id where r.Usuario_id = ' . $tipo->id . ' and e.id =' . $dados['Exemplar_id']);
+
             $insert = $this->emprestimo->create($dados);
 
 
@@ -163,7 +181,7 @@ class EmprestimoController extends Controller
 
         $emprestimo = $this->emprestimo->find($id);
 
-        $delete = $emprestimo->delete();
+        $delete = DB::update('update emprestimo set devolvido = 1 where id='.$id);
 
         if ($delete)
             return redirect()->route('emprestimos.index');

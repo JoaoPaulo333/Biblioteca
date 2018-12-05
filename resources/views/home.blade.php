@@ -15,6 +15,7 @@
                         @endif
 
                         You are logged in!
+                            @if ($user == 'Administrador' || $user == 'Bibliotecario')
                             <div class="form-control">
                                 <a href="{{Route('graficos.index')}}" name="bt1" target="_blank" class="btn-group">
                                     <span class="btn btn-primary" >gerar grafico emprestimos</span>
@@ -32,6 +33,8 @@
                                     <span class="btn btn-primary" >total de livros reservados e emprestados,</span>
                                 </a>
                             </div>
+                            @endif
+                            @if ($user == 'Administrador')
                             <div class="form-control">
                                 <a href="{{url('relatorios/index')}}" name="bt6" target="_blank" class="btn-group">
                                     <span class="btn btn-primary" >gerar Relatorio de Todos os livros e numero de exemplares</span>
@@ -48,6 +51,12 @@
                                 <a href="{{url('relatorios/index5')}}" name="bt5" target="_blank" class="btn-group">
                                     <span class="btn btn-primary" >gerar Relatorio de Livros atrasados</span>
                                 </a>
+                                @endif
+
+
+                            </div>
+
+                            <div>
                             </div>
                         </div>
                     </div>

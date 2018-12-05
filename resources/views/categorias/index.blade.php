@@ -7,6 +7,7 @@
 @section('content')
     <h1>Listagem de Categorias</h1>
 
+    @if ($user == 'Funcionario' || $user == 'Bibliotecario')
     <a href="{{Route('categorias.create')}}" class="btn btn-success">Cadastrar</a>
 
     <table name="tbCategorias" class="table table-striped">
@@ -33,4 +34,5 @@
             </tr>
         @endforeach
     </table>
+    @endif
 @stop

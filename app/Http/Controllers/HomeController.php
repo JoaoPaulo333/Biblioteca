@@ -25,11 +25,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        //pega o tipo do usuario e manda para a pagina com compact
-//        dd($user = auth()->user()->tipo);
+        $user = auth()->user()->tipo;
+        //select u.id , u.nome, e.id, e.arquivo, l.titulo from users u inner join emprestimo em on em.Usuario_id = u.id inner join exemplar e on em.Exemplar_id = e.id inner join livro l on e.Livro_id = l.id
 
-
-
-        return view('home');
+        return view('home',compact('user'));
     }
 }

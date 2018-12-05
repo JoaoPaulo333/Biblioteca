@@ -28,8 +28,9 @@ class AutorController extends Controller
     public function index()
     {
         $autors = $this->autor->all();
+        $user = auth()->user()->tipo;
 
-        return view('autors.index',compact('autors'));
+        return view('autors.index',compact('autors','user'));
     }
 
     /**

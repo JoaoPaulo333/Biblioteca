@@ -5,6 +5,7 @@
 
 
 @section('content')
+    @if ($user == 'Funcionario' || $user == 'Bibliotecario')
     <h1>Listagem de Autores</h1>
 
     <a href="{{Route('autors.create')}}" class="btn btn-success">Cadastrar</a>
@@ -29,4 +30,5 @@
             </tr>
         @endforeach
     </table>
+    @endif
 @stop

@@ -22,8 +22,8 @@
         <form class="form-group col-md-3 " method="post" action="{{Route('emprestimos.update',$emprestimo->id)}}">
             {!! method_field('PUT') !!}
             {!! csrf_field() !!}
-            <input type="hidden" name="dataIda" value="{{date('d/m/y')}}">//essescampos serao mudados
-            <input type="hidden" name="dataVolta" value="{{date('d/m/y')}}">//
+            <input type="hidden" name="dataIda" value="{{date('Y/m/d')}}">
+            <input type="hidden" name="dataVolta" value="{{date('Y/m/d')}}">//
             <input type="hidden" name="devolvido" value="{{$emprestimo->devolvido}}">
             <select class="form-control" name="Usuario_id">
                 @foreach($usuarios as $usuario)

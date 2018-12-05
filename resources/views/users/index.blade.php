@@ -8,7 +8,7 @@
     <h1>Listagem de Usuarios</h1>
 
     <a href="{{Route('users.create')}}" class="btn btn-success">Cadastrar</a>
-
+    @if ($user == 'Funcionario' || $user == 'Bibliotecario')
     <table name="tbUsers" class="table table-striped">
         <thead class="thead-dark">
             <tr>
@@ -43,4 +43,5 @@
             </tr>
         @endforeach
     </table>
+    @endif
 @stop

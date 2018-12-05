@@ -28,8 +28,8 @@ class LivroController extends Controller
     public function index()
     {
         $livros = DB::select('SELECT l.id,l.titulo,l.isbn,l.edicao,l.editora,l.ano,a.nome as autor,c.nome as categoria from livro l inner join autor a on l.Autor_id = a.id inner join categoria c on l.Categoria_id = c.id');
-
-        return view('livros.index',compact('livros'));
+        $user = auth()->user()->tipo;
+        return view('livros.index',compact('livros','user'));
     }
 
     /**

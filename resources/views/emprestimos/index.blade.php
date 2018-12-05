@@ -7,6 +7,7 @@
 @section('content')
     <h1>Listagem de Emprestimos</h1>
 
+    @if ($user == 'Funcionario' || $user == 'Bibliotecario')
     <a href="{{Route('emprestimos.create')}}" class="btn btn-success">Cadastrar</a>
 
     <table name="tbEmprestimos" class="table table-striped">
@@ -34,6 +35,6 @@
                 </td>
             </tr>
         @endforeach
-
+        @endif
     </table>
 @stop

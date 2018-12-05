@@ -30,8 +30,8 @@ class ExemplarController extends Controller
     {
 
         $exemplares = DB::select('select e.id ,e.arquivo,e.disponivel,l.titulo from exemplar e inner join livro l on e.Livro_id = l.id');
-
-        return view('exemplars.index',compact('exemplares'));
+        $user = auth()->user()->tipo;
+        return view('exemplars.index',compact('exemplares','user'));
     }
 
     /**
@@ -98,6 +98,7 @@ class ExemplarController extends Controller
      */
     public function edit($id)
     {
+
 
         $exemplar= $this->exemplar->find($id);
 
