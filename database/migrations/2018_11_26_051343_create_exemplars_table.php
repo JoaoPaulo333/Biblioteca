@@ -16,7 +16,7 @@ class CreateExemplarsTable extends Migration
         Schema::create('exemplar', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('disponivel')->default(1);
-            $table->string('arquivo');
+            $table->string('arquivo')->nullable();
             $table->integer('Livro_id')->unsigned();
             $table->timestamps();
             $table->softDeletes();

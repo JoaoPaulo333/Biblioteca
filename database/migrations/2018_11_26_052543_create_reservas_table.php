@@ -16,6 +16,7 @@ class CreateReservasTable extends Migration
         Schema::create('reservas', function (Blueprint $table) {
             $table->increments('id');
             $table->string('data');
+            $table->integer('correspondido')->default(0);
             $table->integer('Livro_id')->unsigned();
             $table->integer('Usuario_id')->unsigned();
             $table->timestamps();

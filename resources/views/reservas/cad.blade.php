@@ -23,6 +23,7 @@
             {!! method_field('PUT') !!}
             {!! csrf_field() !!}
             <input class="form-control" type="date" name="data" placeholder="Data:" value="{{$reserva->data}}">
+            <input class="form-control" type="hidden" name="correspondido" placeholder="Correspondido:" value="{{$reserva->correspondido}}">
             <select class="form-control" name="Livro_id">
                 @foreach($livros as $livro)
                     <option value="{{$livro->id}}" @if(isset($reserva) && $reserva->Livro_id == $livro->id ) selected @endif>{{$livro->titulo}}</option>
@@ -38,6 +39,8 @@
                 <form class="form-group col-md-3 " method="post" action="{{Route('reservas.store')}}">
                     {!! csrf_field() !!}
                 <input class="form-control" type="date" name="data" placeholder="Data:" value="{{old('data')}}">
+
+                    <input class="form-control" type="hidden" name="correspondido" placeholder="Correspondido:" value="0">
 
                     <select class="form-control" name="Livro_id">
                         @foreach($livros as $livro)

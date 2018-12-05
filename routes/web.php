@@ -50,6 +50,8 @@ Route::get('/grafico/graf2', 'GraficoController@graf2');
 Route::get('/relatorios/index', 'PdfController@index');
 Route::get('/relatorios/index2', 'PdfController@index2');
 Route::get('/relatorios/index3', 'PdfController@index3');
+Route::get('/relatorios/index4', 'PdfController@index4');
+Route::get('/relatorios/index5', 'PdfController@index5');
 
 
 Auth::routes();

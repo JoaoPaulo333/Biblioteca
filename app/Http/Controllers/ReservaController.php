@@ -28,7 +28,7 @@ class ReservaController extends Controller
     public function index()
     {
 
-        $reservas = DB::select('select r.id, r.data,l.titulo, u.name from reserva r inner join livro l on r.Livro_id = l.id inner join users u on r.Usuario_id = u.id');
+        $reservas = DB::select('select r.id, r.data,l.titulo, u.name from reserva r inner join livro l on r.Livro_id = l.id inner join users u on r.Usuario_id = u.id where r.correspondido = 0');
 
         return view('reservas.index',compact('reservas'));
     }

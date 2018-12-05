@@ -42,8 +42,11 @@
                                 <a href="{{url('relatorios/index3')}}" name="bt4" target="_blank" class="btn-group">
                                     <span class="btn btn-primary" >gerar Relatorio de Todos os livros Reservados</span>
                                 </a>
-                                <a href="{{url('grafico/graf2')}}" name="bt5" target="_blank" class="btn-group">
-                                    <span class="btn btn-primary" >total de livros reservados e emprestados,</span>
+                                <a href="{{url('relatorios/index4')}}" name="bt5" target="_blank" class="btn-group">
+                                    <span class="btn btn-primary" >gerar Relatorio de Usuarios</span>
+                                </a>
+                                <a href="{{url('relatorios/index5')}}" name="bt5" target="_blank" class="btn-group">
+                                    <span class="btn btn-primary" >gerar Relatorio de Livros atrasados</span>
                                 </a>
                             </div>
                         </div>
