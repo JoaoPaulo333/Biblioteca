@@ -31,6 +31,7 @@
                 <option value="Aluno" @if(isset($user) && $user->tipo == 'Aluno') selected @endif >Aluno</option>
                 <option value="Funcionario" @if(isset($user) && $user->tipo == 'Funcionario') selected @endif>Funcionario</option>
                 <option value="Professor" @if(isset($user) && $user->tipo == 'Professor') selected @endif>Professor</option>
+                <option value="Bibliotecario" @if(isset($user) && $user->tipo == 'Bibliotecario') selected @endif>Bibliotecário</option>
             </select>
 
             <input type="hidden" name="punicao" value={{$user->punicao}}>
@@ -46,6 +47,7 @@
                 <option value="Aluno"  >Aluno</option>
                 <option value="Funcionario" >Funcionario</option>
                 <option value="Professor" >Professor</option>
+                <option value="Bibliotecario" >Bibliotecário</option>
             </select>
             <input type="hidden" name="punicao" value="0">
     @endif

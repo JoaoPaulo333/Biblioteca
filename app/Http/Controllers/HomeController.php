@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Mpdf\Mpdf;
+use phpDocumentor\Reflection\Types\Compound;
 
 class HomeController extends Controller
 {
@@ -25,6 +27,9 @@ class HomeController extends Controller
     {
         //pega o tipo do usuario e manda para a pagina com compact
 //        dd($user = auth()->user()->tipo);
+
+
+
         return view('home');
     }
 }

@@ -39,6 +39,14 @@ Route::resource('/emprestimos', 'EmprestimoController');
 Route::get('/emprestimos/destroy/{id}', 'EmprestimoController@destroy');
 
 
+
+Route::resource('/graficos', 'GraficoController');
+Route::get('/graficos/show', 'GraficoController@show');
+Route::get('/grafico/graf', 'GraficoController@graf');
+Route::get('/grafico/graf1', 'GraficoController@graf1');
+Route::get('/grafico/graf2', 'GraficoController@graf2');
+
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

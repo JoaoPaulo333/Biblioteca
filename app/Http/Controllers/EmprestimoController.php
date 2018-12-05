@@ -72,6 +72,7 @@ class EmprestimoController extends Controller
                     if($quantidade[0]->cont >=3)
                         return 'O Este usuario ja esta de posse de seu limite de emprestimos';
 //                    else
+                    //fazer o correspondido de reserva
 
 
 
