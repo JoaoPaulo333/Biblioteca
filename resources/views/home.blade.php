@@ -32,6 +32,20 @@
                                     <span class="btn btn-primary" >total de livros reservados e emprestados,</span>
                                 </a>
                             </div>
+                            <div class="form-control">
+                                <a href="{{url('relatorios/index')}}" name="bt6" target="_blank" class="btn-group">
+                                    <span class="btn btn-primary" >gerar Relatorio de Todos os livros e numero de exemplares</span>
+                                </a>
+                                <a href="{{url('relatorios/index2')}}" name="bt3" target="_blank" class="btn-group">
+                                    <span class="btn btn-primary" >gerar Relatorio de Todos os livros Emprestados</span>
+                                </a>
+                                <a href="{{url('relatorios/index3')}}" name="bt4" target="_blank" class="btn-group">
+                                    <span class="btn btn-primary" >gerar Relatorio de Todos os livros Reservados</span>
+                                </a>
+                                <a href="{{url('grafico/graf2')}}" name="bt5" target="_blank" class="btn-group">
+                                    <span class="btn btn-primary" >total de livros reservados e emprestados,</span>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>

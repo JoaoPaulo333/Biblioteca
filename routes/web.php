@@ -47,6 +47,11 @@ Route::get('/grafico/graf1', 'GraficoController@graf1');
 Route::get('/grafico/graf2', 'GraficoController@graf2');
 
 
+Route::get('/relatorios/index', 'PdfController@index');
+Route::get('/relatorios/index2', 'PdfController@index2');
+Route::get('/relatorios/index3', 'PdfController@index3');
+
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

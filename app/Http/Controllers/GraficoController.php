@@ -159,7 +159,7 @@ class GraficoController extends Controller
 
 
         $gra1 = new PHPlot('600','400');
-        $gra1->SetTitle(' Total de livros emprestados ');
+        $gra1->SetTitle(' Total de livros emprestados e reservados ');
         $gra1->SetDataValues($da);
         $gra1->SetPlotType('bars');
         $gra1->SetFileFormat("png");
